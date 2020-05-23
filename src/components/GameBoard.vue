@@ -17,12 +17,12 @@
           <table class="card-container"> 
             <tr v-for="(group, i) in grouped" :key="i">
               <td
-  v-for="(item, i) in group"
-  :key="i"
-  @click="selectButton(item)"
-  :class="{'btn-element-active': item.isSelected, 'btn-element': !item.isSelected, 'select-out': item.isActive}"
->
-                <span>{{ item.title }}</span>
+                v-for="(item, i) in group"
+                :key="i"
+                @click="selectButton(item)"
+                :class="{'btn-element-active': item.isSelected, 'btn-element': !item.isSelected, 'select-out': item.isRemoved}"
+              >
+                <span>{{ item.isSelected && !item.isRemoved ? item.title : null }}</span>
               </td>
             </tr>
           </table>
@@ -58,17 +58,14 @@ export default {
       if (this.selectButtons.length == 2) return;
 
       button.isSelected = true;
-      button.isTitleShow = true;
       this.selectButtons.push(button);
 
       if (this.selectButtons.length == 2) {
         setTimeout(() => {
           if (this.selectButtons[0].title == this.selectButtons[1].title) {
             this.successCount++;
-            this.selectButtons[0].isActive = true;
-            this.selectButtons[1].isActive = true;
-            this.selectButtons[0].isTitleShow = false;
-            this.selectButtons[1].isTitleShow = false;
+            this.selectButtons[0].isRemoved = true;
+            this.selectButtons[1].isRemoved = true;
             this.removeButtons.push(this.selectButtons[0]);
             this.removeButtons.push(this.selectButtons[1]);
             this.selectButtons = [];
@@ -78,8 +75,6 @@ export default {
             this.errorCount++;
             this.selectButtons[0].isSelected = false;
             this.selectButtons[1].isSelected = false;
-            this.selectButtons[0].isTitleShow = false;
-            this.selectButtons[1].isTitleShow = false;
             this.selectButtons = [];
           }
         }, 700);

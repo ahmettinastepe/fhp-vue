@@ -131,7 +131,7 @@ export default {
       for (let i = 0; i < total; i++) {
         const result = Math.floor(Math.random() * this.buttons.length);
         const button = this.buttons[result];
-        const newButton = new Button(button.title, false, false, i, false);
+        const newButton = new Button(button.title, false, false, i);
 
         this.randomButtons.push(newButton);
         this.buttons.splice(result, 1);

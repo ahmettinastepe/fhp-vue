@@ -1,15 +1,13 @@
 export default class {
     constructor(
         title,
-        isActive = false,
+        isRemoved = false,
         isSelected = false,
-        indexNumber = 0,
-        isTitleShow = false
+        indexNumber = 0
     ) {
         this.title = title,
-            this.isActive = isActive,
+            this.isRemoved = isRemoved,
             this.isSelected = isSelected,
-            this.indexNumber = indexNumber,
-            this.isTitleShow = isTitleShow
+            this.indexNumber = indexNumber
     }
 }
